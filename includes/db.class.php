@@ -9,4 +9,18 @@ class DB_Class {
 		self::$db = $db;
 		self::$db->set_charset("utf8");
 	}
+	
+	public static function get_instance() {
+		static $instance = null;
+		
+		if( null === $instance ) {
+			$instance = new static();
+		}
+		
+		return $instance;
+	}
+	
+	public static function get_db() {
+		return self::$db;
+	}
 }

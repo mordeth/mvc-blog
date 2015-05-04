@@ -26,11 +26,11 @@ $action = 'index';
 
 // Extract data from the HTTP request
 $requestPath = parse_url($request_url, PHP_URL_PATH);
+$requestPath = substr( $requestPath, strlen( ROOT_URL ) );
 $requestParts = explode('/', $requestPath);
 if (count($requestParts) >= 2 && $requestParts[1] != '') {
     $controller = strtolower($requestParts[1]);
     if (! preg_match('/^[a-zA-Z0-9_]+$/', $controller)) {
-		print_r($controller);
         die('Invalid controller name. Use letters, digits and underscore only.');
     }
 }
