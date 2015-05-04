@@ -14,14 +14,14 @@ class Main_Controller {
 		$this->model = $model;
 		$this->views = $views;
 		
-		$model_class = "\Models\\" . ucfirst( $model );  
+		include_once ROOT_DIR . "models/{$model}Model.php";
+		
+		$model_class = ucfirst( $model ) . "_Model";  
 		
 		$this->model = new $model_class( array( 'table' => 'none' ) );
-		
-		$this->logged_user = Auth::get_instance()->get_logged_user();
 	}
 	
-	public function home() {
+	public function render() {
 		$template_file = ROOT_DIR . $this->views . 'home.php';
 		
 		include_once ROOT_DIR . '/views/layouts/' . $this->layout;
