@@ -22,8 +22,6 @@ class Main_Controller {
 	}
 	
 	public function render() {
-		$template_file = ROOT_DIR . $this->views . 'home.php';
-		
 		include_once ROOT_DIR . '/views/layouts/' . $this->layout;
 	}
 }

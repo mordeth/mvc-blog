@@ -1,11 +1,8 @@
 <?php
-class Authentication {
-	
-	private static $session = null;
-	
+class UserAuth {
+
 	private function __construct() {
-		// Session lifetime = 30min
-		session_set_cookie_params(1800,"/");
+		session_set_cookie_params(1800, "/");
 		session_start();
 	}
 	
@@ -20,10 +17,11 @@ class Authentication {
 	}
 	
 	public function is_logged() {
-		if ( isset( $_SESSION['username'] ) ) {
+		if ( isset( $_SESSION['user'] ) ) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 	
 	public function login( $username, $password ) {
@@ -31,11 +29,18 @@ class Authentication {
 	}
 	
 	public function get_user() {
-		
+		if ( isset( $_SESSION['user'] )  ) {
+			return array( 
+					'user' => $_SESSION['user'], 
+					'user_id' => $_SESSION['user_id'] 
+			);
+		} else {
+			return array();
+		}
 	}
 	
-	public function logout( ) {
-		
+	public function logout() {
+		session_destroy();
 	} 
 	
 	
