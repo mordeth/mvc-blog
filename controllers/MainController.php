@@ -13,7 +13,7 @@ class Main_Controller {
 	public function __construct( $model = 'main', $views = '/views/layouts/' ) {
 		$this->model = $model;
 		$this->views = $views;
-		
+		$this->title = 'Home page';
 		include_once ROOT_DIR . "models/{$model}Model.php";
 		
 		$model_class = ucfirst( $model ) . "_Model";  
