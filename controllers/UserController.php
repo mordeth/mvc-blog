@@ -36,19 +36,21 @@ class User_Controller extends Main_Controller {
 		$this->layout = 'register.php';
 		$this->actionMessage = '';
 		
-		if(isset( $_POST['name']) && isset( $_POST['username']) && isset( $_POST['password']) && !isset( $_POST['repassword']))) {
-			$name = htmlentities($_POST['name']);
-			$username = htmlentities($_POST['username']);
-			$password = htmlentities($_POST['password']);
-			$repassword = htmlentities($_POST['repassword']);
-			
-			if($password == $repassword) {
+		if(!empty($_POST)) {
+			if(isset( $_POST['name']) && isset( $_POST['username']) && isset( $_POST['password']) && !isset( $_POST['repassword'])) {
+				$name = htmlentities($_POST['name']);
+				$username = htmlentities($_POST['username']);
+				$password = htmlentities($_POST['password']);
+				$repassword = htmlentities($_POST['repassword']);
 				
+				if($password == $repassword) {
+					
+				} else {
+					$this->actionMessage = 'Password doesnt match!';
+				}
 			} else {
-				$this->actionMessage = 'Password doesnt match!';
+				$this->actionMessage = 'All fields are required!';
 			}
-		} else {
-			$this->actionMessage = 'All fields are required!';
 		}
 		
 		$this->renderView();
