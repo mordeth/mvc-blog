@@ -12,10 +12,10 @@
     <title><?php echo htmlspecialchars($this->title) ?></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo ROOT_URL; ?>assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo ROOT_URL; ?>assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,11 +42,17 @@
                 <ul class="nav navbar-nav">
                     <?php if(empty($this->logged_in_user)) { ?>
 					<li>
-                        <a href="<?php echo ROOT_URL; ?>login">Login</a>
+                        <a href="<?php echo ROOT_URL; ?>user/register">Register</a>
+                    </li>
+					<li>
+                        <a href="<?php echo ROOT_URL; ?>user/login">Login</a>
                     </li>
 					<?php } else { ?>
 					<li>
-                        <a href="<?php echo ROOT_URL; ?>login/logout">Logout</a>
+                        <a href="<?php echo ROOT_URL; ?>user/profile">Profile</a>
+                    </li>
+					<li>
+                        <a href="<?php echo ROOT_URL; ?>user/logout">Logout</a>
                     </li>
 					<?php } ?>
                 </ul>
