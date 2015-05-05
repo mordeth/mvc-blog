@@ -1,5 +1,5 @@
 <form method="POST">
-	<?php echo $login_text; ?>
+	<?php echo $this->login_text; ?>
 	<div class="inputField">
 		<label>Username:</label>
 		<input type="text" name="username" />

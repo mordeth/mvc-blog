@@ -27,6 +27,10 @@ class Main_Controller {
 	}
 	
 	public function render() {
+		$this->renderView();
+	}
+	
+	public function renderView() {
 		//Include header layout
 		include_once('views/layouts/header.php');
 		
@@ -38,7 +42,6 @@ class Main_Controller {
 		
 		//Include footer layout
 		include_once('views/layouts/footer.php');
-		
 	}
 }
 
