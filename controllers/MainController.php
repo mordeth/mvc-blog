@@ -18,11 +18,26 @@ class Main_Controller {
 		
 		$model_class = ucfirst( $model ) . "_Model";  
 		
+		$user_auth = UserAuth::get_instance();
+		
+		$user = $user_auth->get_user();
+		
 		$this->model = new $model_class( array( 'table' => 'none' ) );
 	}
 	
 	public function render() {
-		include_once ROOT_DIR . '/views/layouts/' . $this->layout;
+		//Include header layout
+		include_once('views/layouts/header.php');
+		
+		//Include page layout
+		include_once ROOT_DIR . $this->views . $this->layout;
+		
+		//Include sidebar
+		include_once('views/layouts/sidebar.php');
+		
+		//Include footer layout
+		include_once('views/layouts/footer.php');
+		
 	}
 }
 

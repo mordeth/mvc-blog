@@ -6,12 +6,5 @@ class Login_Controller extends Main_Controller {
 		$this->layout = 'login.php';
 	}
 	
-	public function render() {
-		$user_auth = UserAuth::get_instance();
-		
-		$user = $user_auth->get_user();
-
-		include_once ROOT_DIR . '/views/user/' . $this->layout;
-	}
 }
 ?>
