@@ -7,20 +7,21 @@ class Main_Controller {
 	protected $views =  '/views/layouts/';
 	
 	protected $model = null;
-	
+		
 	protected $logged_in_user = array();
 	
 	public function __construct( $model = 'main', $views = '/views/layouts/' ) {
 		$this->model = $model;
 		$this->views = $views;
 		$this->title = 'Home page';
+		
 		include_once ROOT_DIR . "models/{$model}Model.php";
 		
 		$model_class = ucfirst( $model ) . "_Model";  
 		
 		$user_auth = UserAuth::get_instance();
 		
-		$user = $user_auth->get_user();
+		$this->logged_in_user = $user_auth->get_user();
 		
 		$this->model = new $model_class( array( 'table' => 'none' ) );
 	}

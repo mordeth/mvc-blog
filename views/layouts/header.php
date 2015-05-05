@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -36,13 +36,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Home</a>
+                <a class="navbar-brand" href="<?php echo ROOT_URL; ?>">Home</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Login</a>
+                    <?php if(empty($this->logged_in_user)) { ?>
+					<li>
+                        <a href="<?php echo ROOT_URL; ?>login">Login</a>
                     </li>
+					<?php } else { ?>
+					<li>
+                        <a href="<?php echo ROOT_URL; ?>login/logout">Logout</a>
+                    </li>
+					<?php } ?>
                 </ul>
             </div>
         </div>
