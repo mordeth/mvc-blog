@@ -36,10 +36,15 @@ class User_Controller extends Main_Controller {
 		$this->layout = 'register.php';
 		$this->actionMessage = '';
 		
+		if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+			header( 'Location: ' . ROOT_URL . 'user/login' );
+		}
+		
 		if (isset($_POST) && !empty($_POST)) {
 			$user = array(
 				'id' => $_SESSION['user_id'],
-				'name' => htmlentities($_POST['name'])				
+				'name' => htmlentities($_POST['name']),
+				'email'	=> htmlentities($_POST['email'])
 			);
 
 			if(!empty($_POST['password']) && !empty($_POST['repassword'])) {
@@ -51,8 +56,8 @@ class User_Controller extends Main_Controller {
 			}
 			
 			$this->model->update( $user );
-			//header( 'Location: ' . ROOT_URL . 'user/profile' );
-			//exit;
+			header( 'Location: ' . ROOT_URL . 'user/profile' );
+			exit;
 		}
 		
 		$this->user = $this->model->find(array( 'where' => 'id = "' .$_SESSION['user_id'].'"' ));
@@ -66,15 +71,16 @@ class User_Controller extends Main_Controller {
 		$this->actionMessage = '';
 		
 		if(!empty($_POST)) {
-			if(isset($_POST['name']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['repassword'])) {
+			if(isset($_POST['name']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['repassword']) && isset($_POST['email'])) {
 				$name = htmlentities($_POST['name']);
 				$username = htmlentities($_POST['username']);
+				$email = htmlentities($_POST['email']);
 				$password = htmlentities($_POST['password']);
 				$repassword = htmlentities($_POST['repassword']);
 				
 				if($password == $repassword) {
 					if(empty($this->model->user_exist($username))) {
-						$rows = $this->model->insert( array( 'name' => $name, 'username' => $username, 'password' => md5($password)));
+						$rows = $this->model->insert( array( 'name' => $name, 'username' => $username, 'email' => $email, 'password' => md5($password)));
 						header( 'Location: ' . ROOT_URL .'user/login' );
 						exit();
 					} else {

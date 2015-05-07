@@ -9,6 +9,10 @@
 		<input type="text" name="username" value="<?php if(isset($this->user)) { echo $this->user[0]['username']; } ?>" <?php if(isset($this->user)) { echo 'disabled="disabled"'; } ?>/>
 	</div>
 	<div class="inputField">
+		<label>Email:</label>
+		<input type="text" name="email" value="<?php if(isset($this->user)) { echo $this->user[0]['email']; } ?>"/>
+	</div>
+	<div class="inputField">
 		<label>Password:</label> 
 		<input type="password" name="password" />
 	</div>

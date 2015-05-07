@@ -7,7 +7,6 @@ class Main_Model {
 	protected $where;
 	protected $columns;
 	protected $limit;
-	protected $dbconn;
 	
 	public function __construct( $args = array() ) {
 		$args = array_merge( array(
