@@ -7,7 +7,7 @@ class User_Controller extends Main_Controller {
 		$this->layout = 'login.php';
 	}
 	
-	public function render() {
+	public function index() {
 		header( 'Location: ' . ROOT_URL. 'user/login' );
 	}
 	
@@ -31,6 +31,35 @@ class User_Controller extends Main_Controller {
 		$this->renderView();
 	}
 	
+	public function profile() {
+		$this->title = 'User Profile';
+		$this->layout = 'register.php';
+		$this->actionMessage = '';
+		
+		if (isset($_POST) && !empty($_POST)) {
+			$user = array(
+				'id' => $_SESSION['user_id'],
+				'name' => htmlentities($_POST['name'])				
+			);
+
+			if(!empty($_POST['password']) && !empty($_POST['repassword'])) {
+				if($_POST['password'] == $_POST['repassword']) {
+					$user['password'] = md5($_POST['password']);
+				} else {
+					$this->actionMessage = 'Passwords do not match!';
+				}
+			}
+			
+			$this->model->update( $user );
+			//header( 'Location: ' . ROOT_URL . 'user/profile' );
+			//exit;
+		}
+		
+		$this->user = $this->model->find(array( 'where' => 'id = "' .$_SESSION['user_id'].'"' ));
+		
+		$this->renderView();
+	}
+	
 	public function register() {
 		$this->title = 'User Registration';
 		$this->layout = 'register.php';
@@ -51,7 +80,6 @@ class User_Controller extends Main_Controller {
 					} else {
 						$this->actionMessage = 'Username Exist!';
 					}
-					
 				} else {
 					$this->actionMessage = 'Password doesnt match!';
 				}

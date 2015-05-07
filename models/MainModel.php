@@ -47,6 +47,20 @@ class Main_Model {
 		return $this->db->affected_rows;
 	}
 	
+	public function update( $model ) {
+		$query = "UPDATE " . $this->table . " SET ";
+		
+		foreach( $model as $key => $value ) {
+			if( $key === 'id' ) continue;
+			$query .= "$key = '" . $this->db->real_escape_string( $value ) . "',"; 
+		}
+		$query = rtrim( $query, "," );
+		$query .= " WHERE id = " . $model['id'];
+		$this->db->query( $query );
+		
+		return $this->db->affected_rows;
+	}
+	
 	public function find( $args = array() ) {
 		$args = array_merge( array(
 			'table' => $this->table,
