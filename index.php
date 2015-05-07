@@ -23,6 +23,9 @@ require_once('includes/auth.class.php');
 //Include Main Controller
 include_once('controllers/MainController.php');
 
+//Include Main Model
+include_once('models/MainModel.php');
+
 //Define default controller
 $controller = 'Main';
 $action = 'render';

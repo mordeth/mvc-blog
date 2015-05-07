@@ -2,7 +2,7 @@
 class User_Controller extends Main_Controller {
 	
 	public function __construct() {
-		parent::__construct( 'main', '/views/user/' );
+		parent::__construct( 'user', '/views/user/' );
 		$this->title = 'User Login';
 		$this->layout = 'login.php';
 	}
@@ -37,14 +37,16 @@ class User_Controller extends Main_Controller {
 		$this->actionMessage = '';
 		
 		if(!empty($_POST)) {
-			if(isset( $_POST['name']) && isset( $_POST['username']) && isset( $_POST['password']) && !isset( $_POST['repassword'])) {
+			if(isset($_POST['name']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['repassword'])) {
 				$name = htmlentities($_POST['name']);
 				$username = htmlentities($_POST['username']);
 				$password = htmlentities($_POST['password']);
 				$repassword = htmlentities($_POST['repassword']);
 				
 				if($password == $repassword) {
-					
+					$rows = $this->model->insert( array( 'name' => $name, 'username' => $username, 'password' => md5($password)));
+					header( 'Location: ' . ROOT_URL .'user/login' );
+					exit();
 				} else {
 					$this->actionMessage = 'Password doesnt match!';
 				}
