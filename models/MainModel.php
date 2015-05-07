@@ -46,4 +46,51 @@ class Main_Model {
 		
 		return $this->db->affected_rows;
 	}
+	
+	public function find( $args = array() ) {
+		$args = array_merge( array(
+			'table' => $this->table,
+			'where' => '',
+			'columns' => '*',
+			'limit' => 0
+		), $args );
+		
+		extract( $args );
+		
+		$query = "select {$columns} from {$table}";
+		
+		if( ! empty( $where ) ) {
+			$query .= ' where ' . $where;
+		}
+		
+		if( ! empty( $limit ) ) {
+			$query .= ' limit ' . $limit;
+		}
+
+		$results = $this->db->query( $query );
+
+		$result = $this->handle_result( $results );
+		
+		return $result;
+	}
+	
+	protected function handle_result( $result ) {
+		$results = array();
+		
+		if( ! empty( $result ) && $result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$results[] = $row;
+			}
+		}
+		
+		return $results;
+	}
+	
+	public function user_exist( $username ) {
+		$results = $this->find( array( 'where' => 'username = "' .$username.'"' ) );
+		
+		return $results;
+	}
+	
+	
 }

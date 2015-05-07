@@ -44,9 +44,14 @@ class User_Controller extends Main_Controller {
 				$repassword = htmlentities($_POST['repassword']);
 				
 				if($password == $repassword) {
-					$rows = $this->model->insert( array( 'name' => $name, 'username' => $username, 'password' => md5($password)));
-					header( 'Location: ' . ROOT_URL .'user/login' );
-					exit();
+					if(empty($this->model->user_exist($username))) {
+						$rows = $this->model->insert( array( 'name' => $name, 'username' => $username, 'password' => md5($password)));
+						header( 'Location: ' . ROOT_URL .'user/login' );
+						exit();
+					} else {
+						$this->actionMessage = 'Username Exist!';
+					}
+					
 				} else {
 					$this->actionMessage = 'Password doesnt match!';
 				}
