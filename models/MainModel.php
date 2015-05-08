@@ -43,7 +43,7 @@ class Main_Model {
 		$query = "insert into {$this->table}($keys) values($values)";
 		$this->db->query( $query );
 		
-		return $this->db->affected_rows;
+		return $this->db->insert_id;
 	}
 	
 	public function update( $model ) {
