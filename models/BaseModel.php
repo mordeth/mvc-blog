@@ -138,6 +138,29 @@ class Base_Model {
 		return $posts;
 	}
 	
+	public function list_posts_by_tag($id) {
+		$posts = array();
+		$tag_title = $this->find(array( 'table' => 'tags', 'column' => 'title', 'where' => ' id = "'.$this->db->real_escape_string($id[0]).'"'));
+		$post_id = $this->find(array( 'table' => 'tags', 'column' => 'post_id', 'where' => ' title = "'.$tag_title[0]['title'].'"'));
+				
+		$i=0;
+		foreach($post_result as $post) {
+			$posts[$i] = $post;
+			
+			$author = $this->find( array( 'table' => 'users', 'where' => 'id = "' .$post['author'].'"' ) );
+			
+			$posts[$i]['author_user'] = $author[0]['username'];
+
+			$tags = $this->find( array( 'table' => 'tags', 'where' => 'post_id = "' .$post['id'].'"' ) );
+			
+			$posts[$i]['tags'] = $tags;
+			
+			$i++;
+		}
+		
+		return $posts;
+	}
+	
 	public function list_post($id) {
 		
 		$id = $id[0];

@@ -69,6 +69,12 @@ class Posts_Controller extends Main_Controller {
 		$this->renderView();
 	}
 	
+	public function bytag($id) {
+		$this->posts = $this->model->list_posts_by_tag($id);
+		
+		$this->renderView();
+	}
+	
 	public function add() {
 		$this->title = 'Add new post';
 		$this->layout = 'addpost.php';
