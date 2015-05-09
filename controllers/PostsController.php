@@ -14,6 +14,43 @@ class Posts_Controller extends Main_Controller {
 	public function view($id) {
 		$this->layout = 'post.php';
 		
+		if(!empty($_POST)) {
+			if(!empty($_POST['text'])) {
+				
+				if(empty($_POST['name']) && !isset($_SESSION['user_id'])) {
+					$this->actionMessage = 'Name is required!';
+				} else {
+					if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+						$name = htmlentities($_POST['name']);
+						$email = htmlentities($_POST['email']);
+					} else {
+						$user = $this->model->find(array( 'table' => 'users', 'where' => 'id = "' .$_SESSION['user_id'].'"' ));
+						$name = $user[0]['username'];
+						$email = $user[0]['email'];
+					}
+					
+					$text = htmlentities($_POST['text']);
+					
+					$post = $this->model->insert( 
+						array( 
+							'name' => $name, 
+							'text' => $text, 
+							'email' => $email, 
+							'postid' => $id[0]
+						),
+						'comments'
+					);
+
+					if(!empty($post)) {
+						$this->actionMessage = 'Your comment was successfully published!';
+					}
+				}
+				
+			} else {
+				$this->actionMessage = 'Comment text is required!';
+			}
+		}
+		
 		$views_count = $this->model->find(array( 'columns' => 'views', 'where' => 'id = "' .$id[0].'"' ));
 		$views_count = $views_count[0]['views'] + 1;
 		$views = array(
@@ -24,6 +61,8 @@ class Posts_Controller extends Main_Controller {
 		$this->model->update( $views );
 		
 		$this->post = $this->model->list_post($id);
+		
+		$this->post_comments = $this->model->find(array( 'table' => 'comments', 'where' => 'postid = "' .$id[0].'"' ));
 		
 		$this->title = $this->post[0]['title'];
 		

@@ -34,9 +34,14 @@ class Base_Model {
 		$this->db = $instance::get_db();
 	}
 	
-	public function insert( $fields ) {
+	public function insert( $fields, $table = "" ) {
 		$keys = array_keys( $fields );
 		$values = array();
+		if(!empty($table)) {
+			$dbtable = $table;
+		} else {
+			$dbtable = $this->table;
+		}
 		foreach( $fields as $key => $value ) {
 			$values[] = "'" . $this->db->real_escape_string( $value ) . "'";	
 		}
@@ -44,7 +49,7 @@ class Base_Model {
 		$keys = implode( $keys, ',' );
 		$values = implode( $values, ',' );
 		
-		$query = "insert into {$this->table}($keys) values($values)";
+		$query = "insert into {$dbtable}($keys) values($values)";
 		$this->db->query( $query );
 		
 		return $this->db->insert_id;

@@ -3,7 +3,7 @@ body {
 	font-family: Source sans pro, sans;
 }
 
-.sidebar, .content, .marginTop {
+.sidebar, .marginTop, .content {
 	margin-top: 30px;
 }
 
@@ -140,6 +140,15 @@ h1, h2, h3 {
 	margin-right: 10px;
 }
 
+.comments {
+	margin-top: 30px;
+}
+
+.comment {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+}
+
 /* Form styles */
 
 .content label {
@@ -148,7 +157,7 @@ h1, h2, h3 {
 	font-weight: 300;
 }
 
-.content input[type="text"], .content input[type="email"], .content input[type="password"], .content textarea, .content select , .bootstrap-tagsinput{
+.content input[type="text"], .content input[type="email"], .content input[type="password"], .content textarea, .content select , .bootstrap-tagsinput, .comments input[type="text"], .comments input[type="email"], .comments input[type="password"], .comments textarea {
     border: 1px solid #DADADA;
     color: #888;
     height: 30px;
@@ -164,13 +173,13 @@ h1, h2, h3 {
     -moz-box-shadow: inset 0px 1px 4px #ECECEC;
     -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
 }
-.content textarea{
+.content textarea, .comments textarea{
     padding: 5px 3px 3px 5px;
 }
-.content textarea{
+.content textarea, .comments textarea{
     height:100px;
 }
-.content .button {
+.content .button, .comments .button {
     background: #E27575;
     border: none;
     padding: 10px 25px 10px 25px;
@@ -181,6 +190,6 @@ h1, h2, h3 {
     cursor: pointer;
 	float: right;
 }
-.content .button:hover {
+.content .button:hover, .comments .button:hover  {
     background: #CF7A7A
 }

@@ -29,21 +29,50 @@ if(!empty($this->post)) {
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row comments">
 			<div class="col-md-2"></div>
 			<div class="col-md-9">
-				 <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="<?php echo $this->model->get_gravatar('cvetanov@gmail.com'); ?>" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small class="pull-right">August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
+				<?php if(!empty($this->post_comments)): ?>
+				<h3>Comments</h3>
+					<!-- Comment -->
+					<?php foreach($this->post_comments as $comment): ?>
+					<div class="media comment">
+						<a class="pull-left" href="#">
+							<img class="media-object" src="<?php echo $this->model->get_gravatar($comment['email']); ?>" alt="">
+						</a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								<?php if(!empty($comment['email'])): ?>
+									<a href="mailto:<?php echo $comment['email']; ?>"><?php echo $comment['name']; ?></a>
+								<?php else: ?>	
+									<?php echo $comment['name']; ?>
+								<?php endif; ?>
+								<small class="pull-right"><?php echo $comment['date']; ?></small>
+							</h4>
+							<?php echo $comment['text']; ?>
+						</div>
+					</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+
+				<h3 class="marginTop">Write a comment</h3>
+				
+				<?php if(!empty($this->actionMessage)): ?><div class="actionMessage"><?php echo $this->actionMessage; ?></div><?php endif; ?>
+				
+				<form method="POST">
+					<?php if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])): ?>
+					<div class="col-md-6">
+						<input type="text" name="name" placeholder="Your name">
+					</div>
+					<div class="col-md-6">
+						<input type="email" name="email" placeholder="Youer email (optional)">
+					</div>
+					<?php endif; ?>
+					<div class="col-md-12">
+						<textarea name="text" placeholder="Your comment"></textarea>
+					</div>
+					<div class="col-md-12"><input type="submit" name="submit" value="Comment" class="button"></div>
+				</form>
 			</div>
 		</div>
 	</div>
