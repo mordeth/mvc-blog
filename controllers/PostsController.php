@@ -11,6 +11,14 @@ class Posts_Controller extends Main_Controller {
 		header( 'Location: ' . ROOT_URL );
 	}
 	
+	public function view($id) {
+		$this->layout = 'post.php';
+		
+		$this->post = $this->model->list_post($id);
+		
+		$this->renderView();
+	}
+	
 	public function add() {
 		$this->title = 'Add new post';
 		$this->layout = 'addpost.php';

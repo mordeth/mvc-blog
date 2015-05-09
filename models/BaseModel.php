@@ -83,6 +83,8 @@ class Base_Model {
 		if( ! empty( $limit ) ) {
 			$query .= ' limit ' . $limit;
 		}
+		
+		$query .= ' order by `id` DESC';
 
 		$results = $this->db->query( $query );
 
@@ -109,7 +111,7 @@ class Base_Model {
 		return $results;
 	}
 	
-	public function list_post() {
+	public function list_posts() {
 		$posts = array();
 		$post_result = $this->find();
 		
@@ -129,6 +131,23 @@ class Base_Model {
 		}
 		
 		return $posts;
+	}
+	
+	public function list_post($id) {
+		
+		$id = $id[0];
+		
+		$post = $this->find(array( 'where' => 'id = "' .$id.'"' ));
+		
+		$author = $this->find( array( 'table' => 'users', 'where' => 'id = "' .$post[0]['author'].'"' ) );
+
+		$post[0]['author_user'] = $author[0]['username'];
+
+		$tags = $this->find( array( 'table' => 'tags', 'where' => 'post_id = "' .$id.'"' ) );
+		
+		$post[0]['tags'] = $tags;
+
+		return $post;
 
 	}
 	

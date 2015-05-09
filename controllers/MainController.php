@@ -2,7 +2,7 @@
 
 class Main_Controller {
 	
-	protected $layout = 'home.php';
+	protected $layout = 'posts.php';
 	
 	protected $views =  '/views/layouts/';
 	
@@ -10,7 +10,7 @@ class Main_Controller {
 		
 	protected $logged_in_user = array();
 	
-	public function __construct( $model = 'main', $views = '/views/layouts/' ) {
+	public function __construct( $model = 'main', $views = '/views/posts/' ) {
 		$this->model = $model;
 		$this->views = $views;
 		$this->title = 'Home page';
@@ -27,7 +27,7 @@ class Main_Controller {
 	}
 	
 	public function render() {
-		$this->posts = $this->model->list_post();
+		$this->posts = $this->model->list_posts();
 		
 		$this->renderView();
 	}
