@@ -1,6 +1,6 @@
 <?php
 
-class Posts_Model extends Main_Model {
+class Posts_Model extends Base_Model {
 	public function __construct( $args = array() ) {
 		parent::__construct( array(
 			'table' => 'posts'

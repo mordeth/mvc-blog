@@ -27,6 +27,8 @@ class Main_Controller {
 	}
 	
 	public function render() {
+		$this->posts = $this->model->list_post();
+		
 		$this->renderView();
 	}
 	

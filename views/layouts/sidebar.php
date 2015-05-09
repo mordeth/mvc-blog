@@ -15,6 +15,9 @@
 			</li>
 			<?php } else { ?>
 			<li>
+				<a href="<?php echo ROOT_URL; ?>posts/add">Add new post</a>
+			</li>
+			<li>
 				<a href="<?php echo ROOT_URL; ?>user/profile">Profile</a>
 			</li>
 			<li>
@@ -23,4 +26,4 @@
 			<?php } ?>
 		</ul>
 	</div>
-	<div class="col-md-8 content">
+	<div class="col-md-8">

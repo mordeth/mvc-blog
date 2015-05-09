@@ -1,3 +1,4 @@
+<div class="content">
 <form method="POST">
 	<?php if(!empty($this->actionMessage)): ?><div class="actionMessage"><?php echo $this->actionMessage; ?></div><?php endif; ?>
 	
@@ -17,3 +18,4 @@
 		</div>
 	</div>
 </form>
+</div>
