@@ -1,0 +1,114 @@
+body {
+	background: #ebebeb;
+	font-family: Raleway, sans;
+}
+
+.sidebar, .content {
+	margin-top: 30px;
+}
+
+.logo {
+	width: 120px;
+	height: 120px;
+	background: #1e2326;
+	color: #fff;
+	border-radius: 50%;
+	margin: 0px auto;
+	text-align: center;
+	line-height: 120px;
+	font-size: 20px;
+}
+
+.description {
+	color: #a09a9a;
+	text-align: center;
+	font-size: 14px;
+	padding-top: 15px;
+}	
+
+.content {
+	background: #fff;
+	padding: 50px 0px;
+}
+
+.actionMessage {
+	background: #f4f5a0;
+	width: 80%;
+	margin-left: 10%;
+	padding: 15px 30px;
+	text-align: center;
+	border: 2px solid #e3e49c;
+	margin-bottom: 35px;
+}
+
+.sidebar .nav {
+	margin-top: 40px;
+}
+
+.sidebar .nav li {
+	background: none;
+	text-align: center;
+}
+
+.sidebar .nav li a {
+	color: #000;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 12px;
+	padding: 0px;
+	font-family: Arial;
+	padding: 5px 0px;
+	border-bottom: 1px dashed #ccc;
+	margin: 0px auto;
+	width: 60%;
+}
+
+.sidebar .nav li a:hover {
+	color: #ccc;
+	background: none;
+}
+
+/* Form styles */
+
+.content label {
+	display: block;
+	color: #a09a9a;
+	font-weight: 300;
+}
+
+.content input[type="text"], .content input[type="email"], .content input[type="password"], .content textarea, .content select , .bootstrap-tagsinput{
+    border: 1px solid #DADADA;
+    color: #888;
+    height: 30px;
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    outline: 0 none;
+    padding: 3px 3px 3px 5px;
+    width: 100%;
+    font-size: 12px;
+    line-height:15px;
+    box-shadow: inset 0px 1px 4px #ECECEC;
+    -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+    -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+.content textarea{
+    padding: 5px 3px 3px 5px;
+}
+.content textarea{
+    height:100px;
+}
+.content .button {
+    background: #E27575;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    box-shadow: 1px 1px 5px #B6B6B6;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    cursor: pointer;
+	float: right;
+}
+.content .button:hover {
+    background: #CF7A7A
+}

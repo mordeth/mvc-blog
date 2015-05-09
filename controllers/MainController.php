@@ -34,11 +34,11 @@ class Main_Controller {
 		//Include header layout
 		include_once('views/layouts/header.php');
 		
-		//Include page layout
-		include_once ROOT_DIR . $this->views . $this->layout;
-		
 		//Include sidebar
 		include_once('views/layouts/sidebar.php');
+		
+		//Include page layout
+		include_once ROOT_DIR . $this->views . $this->layout;
 		
 		//Include footer layout
 		include_once('views/layouts/footer.php');
