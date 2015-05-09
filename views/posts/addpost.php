@@ -2,6 +2,7 @@
 	<?php if(!empty($this->actionMessage)): ?><div class="actionMessage"><?php echo $this->actionMessage; ?></div><?php endif; ?>
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
+			<?php if(!empty($this->title)): ?><h2><?php echo $this->title; ?></h2><?php endif; ?>
 			<div class="inputField">
 				<label>Post Title:</label>
 				<input type="text" name="title"/>
