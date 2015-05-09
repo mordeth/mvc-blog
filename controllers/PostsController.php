@@ -14,7 +14,18 @@ class Posts_Controller extends Main_Controller {
 	public function view($id) {
 		$this->layout = 'post.php';
 		
+		$views_count = $this->model->find(array( 'columns' => 'views', 'where' => 'id = "' .$id[0].'"' ));
+		$views_count = $views_count[0]['views'] + 1;
+		$views = array(
+			'id' => $id[0],
+			'views' => $views_count
+		);
+
+		$this->model->update( $views );
+		
 		$this->post = $this->model->list_post($id);
+		
+		$this->title = $this->post[0]['title'];
 		
 		$this->renderView();
 	}

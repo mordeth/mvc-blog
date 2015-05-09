@@ -136,6 +136,10 @@ h1, h2, h3 {
 	margin-right: 5px;
 }
 
+.post .media-object {
+	margin-right: 10px;
+}
+
 /* Form styles */
 
 .content label {
