@@ -3,7 +3,7 @@ if(!empty($this->post)) {
 	$post = $this->post[0];
 ?>
 	<div class="post marginTop">
-		<div class="postImage"><img src="http://photos2.appleinsidercdn.com/gallery/12086-5647-150309-MacBook-1-l.jpg" alt="Image"></div>
+		<div class="postImage"><img src="http://lorempixel.com/700/250" alt="Image"></div>
 		<div class="row">
 			<div class="col-md-2">
 				<div class="smallbox published"><i class="fa fa-calendar"></i> <?php echo date("F j, Y", strtotime($post['date'])); ?></div>
