@@ -7,7 +7,7 @@ if(!empty($this->post)) {
 		<div class="row">
 			<div class="col-md-2">
 				<div class="smallbox published"><i class="fa fa-calendar"></i> <?php echo date("F j, Y", strtotime($post['date'])); ?></div>
-				<div class="smallbox author"><i class="fa fa-user"></i> <a href=""><?php echo $post['author_user']; ?></a></div>
+				<div class="smallbox author"><i class="fa fa-user"></i> <a href="<?php echo ROOT_URL; ?>posts/byauthor/<?php echo $post['author']; ?>"><?php echo $post['author_user']; ?></a></div>
 				<div class="smallbox views"><i class="fa fa-bar-chart"></i> <?php echo $post['views']; ?> views</div>
 			</div>
 			<div class="col-md-9">

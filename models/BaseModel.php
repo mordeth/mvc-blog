@@ -115,6 +115,12 @@ class Base_Model {
 		
 		return $results;
 	}
+	
+	public function get_username($id) {
+		$results = $this->find( array( 'table' => 'users', 'where' => 'id = "' .$this->db->real_escape_string($id[0]).'"' ) );
+		
+		return $results[0]['username'];
+	}
 		
 	public function list_posts() {
 		$posts = array();
@@ -145,6 +151,27 @@ class Base_Model {
 		WHERE t.title = '".$this->db->real_escape_string($id[0])."'");
 		$i=0;
 		while ($post = $statement->fetch_assoc()) {
+			$posts[$i] = $post;
+			
+			$author = $this->find( array( 'table' => 'users', 'where' => 'id = "' .$post['author'].'"' ) );
+			
+			$posts[$i]['author_user'] = $author[0]['username'];
+
+			$tags = $this->find( array( 'table' => 'tags', 'where' => 'post_id = "' .$post['id'].'"' ) );
+			
+			$posts[$i]['tags'] = $tags;
+			
+			$i++;
+		}
+		
+		return $posts;
+	}
+	
+	public function list_posts_by_author($id) {
+		$posts = array();
+		$post_result = $this->find( array( 'table' => 'posts', 'where' => 'author = "' .$this->db->real_escape_string($id[0]).'"' ) );
+		$i=0;
+		foreach ($post_result as $post) {
 			$posts[$i] = $post;
 			
 			$author = $this->find( array( 'table' => 'users', 'where' => 'id = "' .$post['author'].'"' ) );

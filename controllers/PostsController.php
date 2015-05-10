@@ -79,6 +79,16 @@ class Posts_Controller extends Main_Controller {
 		$this->renderView();
 	}
 	
+	public function byauthor($id) {
+		$this->layout = 'posts.php';
+		$this->archive_title = $this->model->get_username($id);
+		$this->archive_type = 'Author';
+		
+		$this->posts = $this->model->list_posts_by_author($id);
+		
+		$this->renderView();
+	}
+	
 	public function add() {
 		$this->title = 'Add new post';
 		$this->layout = 'addpost.php';
