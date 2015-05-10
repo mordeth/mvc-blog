@@ -1,6 +1,9 @@
 <?php
 if(!empty($this->posts)) {
 	$i = 0;
+	if(!empty($this->archive_title)) {
+		echo '<h1>Posts by '.$this->archive_type.': '.$this->archive_title.'</h1>';
+	}
 	foreach($this->posts as $post) {
 		?>
 			<div class="post <?php if($i == 0) { echo 'marginTop'; } ?>">
@@ -21,7 +24,7 @@ if(!empty($this->posts)) {
 							if(!empty($post['tags'])) { 
 								$tags = 'Tags:';
 								foreach($post['tags'] as $tag) {
-									$tags .= ' <a href="'.ROOT_URL.'posts/bytag/'.$tag['id'].'">'.$tag['title'].'</a> / ';
+									$tags .= ' <a href="'.ROOT_URL.'posts/bytag/'.$tag['title'].'">'.$tag['title'].'</a> / ';
 								}	
 								
 								echo substr($tags, 0, -3);
@@ -34,4 +37,6 @@ if(!empty($this->posts)) {
 		<?php
 		$i++;
 	}
+} else {
+	echo '<h1>No posts match your criteriea'; 
 }

@@ -20,7 +20,7 @@ if(!empty($this->post)) {
 					if(!empty($post['tags'])) { 
 						$tags = 'Tags:';
 						foreach($post['tags'] as $tag) {
-							$tags .= ' <a href="'.ROOT_URL.'posts/bytag/'.$tag['id'].'">'.$tag['title'].'</a> / ';
+							$tags .= ' <a href="'.ROOT_URL.'posts/bytag/'.$tag['title'].'">'.$tag['title'].'</a> / ';
 						}	
 						
 						echo substr($tags, 0, -3);

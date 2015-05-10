@@ -70,6 +70,10 @@ class Posts_Controller extends Main_Controller {
 	}
 	
 	public function bytag($id) {
+		$this->layout = 'posts.php';
+		$this->archive_title = htmlentities($id[0]);
+		$this->archive_type = 'Tag';
+		
 		$this->posts = $this->model->list_posts_by_tag($id);
 		
 		$this->renderView();

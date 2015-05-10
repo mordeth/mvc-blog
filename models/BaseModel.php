@@ -111,11 +111,11 @@ class Base_Model {
 	}
 	
 	public function user_exist( $username ) {
-		$results = $this->find( array( 'where' => 'username = "' .$username.'"' ) );
+		$results = $this->find( array( 'where' => 'username = "' .$this->db->real_escape_string($username).'"' ) );
 		
 		return $results;
 	}
-	
+		
 	public function list_posts() {
 		$posts = array();
 		$post_result = $this->find();
@@ -140,11 +140,11 @@ class Base_Model {
 	
 	public function list_posts_by_tag($id) {
 		$posts = array();
-		$tag_title = $this->find(array( 'table' => 'tags', 'column' => 'title', 'where' => ' id = "'.$this->db->real_escape_string($id[0]).'"'));
-		$post_id = $this->find(array( 'table' => 'tags', 'column' => 'post_id', 'where' => ' title = "'.$tag_title[0]['title'].'"'));
-				
+		$statement = $this->db->query("SELECT p.id, p.title, p.content, p.date, p.author, p.views 
+		FROM posts p JOIN tags t ON t.post_id = p.id 
+		WHERE t.title = '".$this->db->real_escape_string($id[0])."'");
 		$i=0;
-		foreach($post_result as $post) {
+		while ($post = $statement->fetch_assoc()) {
 			$posts[$i] = $post;
 			
 			$author = $this->find( array( 'table' => 'users', 'where' => 'id = "' .$post['author'].'"' ) );
