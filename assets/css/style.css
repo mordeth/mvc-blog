@@ -193,3 +193,41 @@ h1, h2, h3 {
 .content .button:hover, .comments .button:hover  {
     background: #CF7A7A
 }
+
+.search, .popular_tags, .archive {
+	width: 60%;
+	margin: 0px auto;
+	margin-top: 40px;
+}
+
+
+.search .button {
+	background: #E27575;
+	color: #FFF;
+}
+
+.popular_tags ul, .archive ul {
+	padding: 0px;
+	padding-left: 5px;
+}
+
+.popular_tags li {
+	list-style: none;
+	display: inline-block;
+	padding-right: 5px;
+}
+
+.archive li {
+	list-style: none;
+}
+
+.popular_tags li a, .archive li a  {
+	color: #666;
+	font-weight: bold;
+}
+
+@media only screen and (max-width: 760px) {
+	.row {
+		padding: 0px 15px;
+	}
+}

@@ -24,6 +24,10 @@ class Main_Controller {
 		$this->logged_in_user = $user_auth->get_user();
 		
 		$this->model = new $model_class( array( 'table' => 'none' ) );
+		
+		$this->popular_tags = $this->model->most_popular_tags();
+		
+		$this->archives = $this->model->getPostDates();
 	}
 	
 	public function render() {

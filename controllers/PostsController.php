@@ -69,18 +69,42 @@ class Posts_Controller extends Main_Controller {
 		$this->renderView();
 	}
 	
+	public function search() {
+		$this->layout = 'posts.php';
+		$this->title = 'Search for: '.htmlentities($_POST['search']);
+		$this->archive_title = htmlentities($_POST['search']);
+		$this->archive_type = 'Tag';
+		
+		$this->posts = $this->model->list_posts_by_tag(htmlentities($_POST['search']), true);
+		
+		$this->renderView();
+	}
+	
+	public function bydate($args) {
+		$this->layout = 'posts.php';
+		$this->title = 'List posts by: '.htmlentities($args[0]). ' '.date("F", mktime(0, 0, 0, $args[1], 10));
+		$this->archive_title = htmlentities($args[0]). ' '.date("F", mktime(0, 0, 0, $args[1], 10));
+		$this->archive_type = 'Date';
+
+		$this->posts = $this->model->list_posts_by_date($args[0], $args[1]);
+ 
+        $this->renderView();
+    }
+	
 	public function bytag($id) {
 		$this->layout = 'posts.php';
+		$this->title = 'List posts tagged by: '.htmlentities($id[0]);
 		$this->archive_title = htmlentities($id[0]);
 		$this->archive_type = 'Tag';
 		
-		$this->posts = $this->model->list_posts_by_tag($id);
+		$this->posts = $this->model->list_posts_by_tag($id[0]);
 		
 		$this->renderView();
 	}
 	
 	public function byauthor($id) {
 		$this->layout = 'posts.php';
+		$this->title = 'List posts published by: '.$this->model->get_username($id);
 		$this->archive_title = $this->model->get_username($id);
 		$this->archive_type = 'Author';
 		

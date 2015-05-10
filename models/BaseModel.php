@@ -121,7 +121,12 @@ class Base_Model {
 		
 		return $results[0]['username'];
 	}
-		
+	
+	public function most_popular_tags() {
+		$statement = $this->db->query("SELECT id, title, count(*) as cnt FROM tags GROUP BY  title ORDER BY cnt DESC LIMIT 10");
+		return $statement->fetch_all();
+	}
+	
 	public function list_posts() {
 		$posts = array();
 		$post_result = $this->find();
@@ -144,11 +149,17 @@ class Base_Model {
 		return $posts;
 	}
 	
-	public function list_posts_by_tag($id) {
+	public function list_posts_by_tag($id, $like = false) {
 		$posts = array();
-		$statement = $this->db->query("SELECT p.id, p.title, p.content, p.date, p.author, p.views 
-		FROM posts p JOIN tags t ON t.post_id = p.id 
-		WHERE t.title = '".$this->db->real_escape_string($id[0])."'");
+		if($like == false) {
+			$statement = $this->db->query("SELECT p.id, p.title, p.content, p.date, p.author, p.views 
+			FROM posts p JOIN tags t ON t.post_id = p.id 
+			WHERE t.title = '".$this->db->real_escape_string($id)."'");
+		} else {
+			$statement = $this->db->query("SELECT p.id, p.title, p.content, p.date, p.author, p.views 
+			FROM posts p JOIN tags t ON t.post_id = p.id 
+			WHERE t.title LIKE '%".$this->db->real_escape_string($id)."%'");
+		}
 		$i=0;
 		while ($post = $statement->fetch_assoc()) {
 			$posts[$i] = $post;
@@ -217,6 +228,46 @@ class Base_Model {
 		}
 		return $url;
 	}
+	
+	
+	public function list_posts_by_date($year, $month = null) {
+		$posts = array();
+		$query = 'SELECT * FROM posts p WHERE YEAR(p.date) = '. $this->db->real_escape_string($year);
+        if ($month) {
+            $statement = $this->db->query("$query AND MONTH(p.date) = ". $this->db->real_escape_string($month));
+        } else {
+            $statement = $this->db->query($query);
+        }
+		$i=0;
+		while ($post = $statement->fetch_assoc()) {
+			$posts[$i] = $post;
+			
+			$author = $this->find( array( 'table' => 'users', 'where' => 'id = "' .$post['author'].'"' ) );
+			
+			$posts[$i]['author_user'] = $author[0]['username'];
+
+			$tags = $this->find( array( 'table' => 'tags', 'where' => 'post_id = "' .$post['id'].'"' ) );
+			
+			$posts[$i]['tags'] = $tags;
+			
+			$i++;
+		}
+		
+        return $posts;
+	}
+	
+	public function getPostDates() {
+        $dates = array();
+		$statement = $this->db->query('SELECT MONTH(p.date) AS month, MONTHNAME(p.date) AS monthname, ' .
+            'YEAR(p.date) AS year FROM posts p '.
+            'GROUP BY CONCAT(YEAR(p.date), MONTH(p.date)) DESC');
+		
+		while ($date = $statement->fetch_assoc()) {
+			$dates[] = $date;
+		}	
+		
+        return $dates;
+    }
 	
 	
 }
